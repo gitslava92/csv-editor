@@ -86,6 +86,48 @@ export const getTheme = (mode: PaletteMode): ThemeOptions => {
         }
       }
     },
+    typography: {
+      fontFamily: 'Inter, sans-serif',
+      body1: {
+        fontSize: '16px',
+      },
+      body2: {
+        fontSize: '18px',
+        '@media (max-width:900px)': {
+          fontSize: '16px',
+        },
+      },
+      subtitle1: {
+        fontSize: '14px',
+      },
+      subtitle2: {
+        fontSize: '12px',
+      },
+      table: {
+        fontSize: '12px',
+      },
+      h2: {
+        fontSize: '56px',
+        '@media (max-width:1200px)': {
+          fontSize: '3rem',
+        },
+        '@media (max-width:900px)': {
+          fontSize: '2rem',
+        },
+        '@media (max-width:600px)': {
+          fontSize: '1.75rem',
+        },
+      },
+      h3: {
+        fontSize: '36px',
+      },
+      h4: {
+        fontSize: '24px',
+      },
+      h5: {
+        fontSize: '20px',
+      },
+    },
     breakpoints: {
       values: {
         xs: 0,

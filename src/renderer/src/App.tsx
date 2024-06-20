@@ -5,6 +5,7 @@ import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { useMemo, createContext, useState } from 'react'
 import { Main } from './components/Template/Main'
+import { createRootStore } from '@renderer/components/store/rootStore'
 
 dayjs.extend(utc)
 
@@ -31,6 +32,10 @@ export const App = () => {
     }),
     []
   )
+
+  const rootStore = createRootStore()
+
+  console.log('rootStore', rootStore)
 
   const theme = useMemo(() => createTheme(getTheme(mode)), [mode])
 

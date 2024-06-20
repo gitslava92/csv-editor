@@ -1,20 +1,33 @@
-import { Tabs } from '@renderer/components/Organisms/Tabs/Tabs'
-import { TitleBox } from '@renderer/components/Template/Main.styles'
-import { Paper, Typography } from '@mui/material'
-import { ThemeToggle } from '@renderer/components/Molecules/ThemeToggle/ThemeToggle'
+import { Snackbar } from '../Atoms/Snackbar/Snackbar'
+import { ControlBoard } from '../Organisms/ControlBoard/ControlBoard'
+import { DataTable } from '../Organisms/DataTable/DataTable'
+import { createRootStore } from '@renderer/components/store/rootStore';
 
 export const Main = () => {
+  const {
+    items: { items, setItems },
+    utfError: { utfError, setUtfError },
+    dateFormat: { format },
+    isSnackBarOpen: { isSnackBarOpen, setIsSnackBarOpen },
+    dateFrom: { dateValueFrom, setDateValueFrom },
+    dateTo: { dateValueTo, setDateValueTo },
+    error: { error },
+  } = createRootStore()
+
   return (
-    <Paper>
-      <TitleBox>
-        <Typography variant="h5">
-          Controls
-        </Typography>
-
-        <ThemeToggle />
-      </TitleBox>
-
-      <Tabs />
-    </Paper>
+    <>
+      <ControlBoard />
+      <Snackbar
+        utfError={utfError}
+        open={isSnackBarOpen}
+        setOpen={setIsSnackBarOpen}
+      />
+      <DataTable
+        rows={items}
+        setData={setItems}
+        format={format}
+        setUtfError={setUtfError}
+      />
+    </>
   )
 }

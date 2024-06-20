@@ -31,6 +31,11 @@
     "@mui/x-date-pickers": "^7.7.0",
     "dayjs": "^1.11.11",
     "electron-updater": "^6.1.7",
+    "mobx": "^6.12.4",
+    "mobx-react-lite": "^4.0.7",
+    "react-csv": "^2.2.2",
+    "react-hook-form": "^7.52.0",
+    "react-papaparse": "^4.4.0",
     "styled-components": "^6.1.11"
   },
   "devDependencies": {
