@@ -83,6 +83,27 @@ export const getTheme = (mode: PaletteMode): ThemeOptions => {
           size: 'small',
           margin: 'normal',
           variant: 'outlined'
+        },
+        styleOverrides: {
+          root: {
+            marginTop: 0,
+            marginBottom: 24,
+            '& .MuiOutlinedInput-root': {
+              borderRadius: 8,
+            },
+            '& p': {
+              marginTop: 0
+            }
+          }
+        }
+      },
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            margin: 24,
+            padding: 24,
+            borderRadius: 8,
+          }
         }
       }
     },

@@ -1,4 +1,4 @@
-import { styled } from '@mui/system'
+import { Box, styled } from '@mui/system'
 import { Typography } from '@mui/material'
 
 export const Title = styled(Typography)(({ theme }) => ({
@@ -7,4 +7,11 @@ export const Title = styled(Typography)(({ theme }) => ({
   marginBottom: 1,
   gap: theme.spacing(1),
   marginBottom: theme.spacing(2),
+}))
+
+export const Error = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  left: 8,
+  fontSize: theme.spacing(1.5),
+  color: theme.palette.danger.main
 }))

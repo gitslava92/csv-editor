@@ -1,10 +1,9 @@
-import React from 'react'
 import { Box, Button } from '@mui/material'
 import dayjs from 'dayjs'
 import * as isBetween from 'dayjs/plugin/isBetween'
 import { PeriodPicker } from './PeriodPicker'
-import { PeriodFormat } from './PeriodFormat'
-import { createRootStore } from '@renderer/components/store/rootStore'
+import { PeriodFormat } from '@renderer/components/Molecules/PeriodFormat/PeriodFormat'
+import { rootStore } from '../../store/rootStore'
 
 dayjs.extend(isBetween as any)
 
@@ -15,7 +14,7 @@ export function PeriodControl() {
     dateFrom: { dateValueFrom, setDateValueFrom },
     dateTo: { dateValueTo, setDateValueTo },
     error: { error },
-  } = createRootStore()
+  } = rootStore
 
   const handleResetDates = () => {
     setDateValueFrom(dayjs())

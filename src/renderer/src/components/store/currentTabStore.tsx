@@ -1,5 +1,4 @@
 import { makeAutoObservable } from "mobx";
-import { ETabs } from '../Template/Main'
 
 export enum ETabs {
   File, Period, Duplicates, Adding, Funnels

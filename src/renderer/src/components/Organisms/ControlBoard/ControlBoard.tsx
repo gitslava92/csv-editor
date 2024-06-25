@@ -1,31 +1,33 @@
 import { TitleBox } from '@renderer/components/Template/Main.styles'
-import { Paper, Tab, Tabs as MUITabs, Typography } from '@mui/material'
+import { Tab, Tabs as MUITabs, Typography } from '@mui/material'
 import { ThemeToggle } from '@renderer/components/Molecules/ThemeToggle/ThemeToggle'
 import { SyntheticEvent, useEffect } from 'react'
 import { TabPanel } from '@renderer/components/Atoms/TabPanel/TabPanel'
 import { UploadControl } from '@renderer/components/Organisms/UploadFile/UploadControl'
-import { createRootStore } from '@renderer/components/store/rootStore'
 import { ETabs } from '@renderer/components/store/currentTabStore'
 import { AddingControl } from '@renderer/components/Organisms/AddingControl/AddingControl'
 import { FunnelControl } from '@renderer/components/Organisms/FunnelControl/FunnelControl'
 import { PeriodControl } from '@renderer/components/Organisms/PeriodControl/PeriodControl'
 import { DuplicateControl } from '@renderer/components/Organisms/DuplicatesControl/DuplicatesControl'
+import { observer } from 'mobx-react-lite'
+import { rootStore } from '../../store/rootStore'
+import { Paper } from './ControlBoard.styles'
 
 const tabs = [
   { id: ETabs.File, title: 'File', component: UploadControl },
-  { id: ETabs.Period, title: 'Period', component: PeriodControl },
-  { id: ETabs.Duplicates, title: 'Duplicates', component: DuplicateControl },
+  // { id: ETabs.Period, title: 'Period', component: PeriodControl },
+  // { id: ETabs.Duplicates, title: 'Duplicates', component: DuplicateControl },
   { id: ETabs.Adding, title: 'Adding', component: AddingControl },
-  { id: ETabs.Funnels, title: 'Funnels', component: FunnelControl }
+  // { id: ETabs.Funnels, title: 'Funnels', component: FunnelControl }
 ]
 
-export const ControlBoard = () => {
+export const ControlBoard = observer(() => {
   const {
     items: { items },
     isSnackBarOpen: { setIsSnackBarOpen },
     currentTab: { currentTab, setCurrentTab },
     utfError: { utfError }
-  } = createRootStore()
+  } = rootStore
 
   useEffect(() => {
     if (items.length) {
@@ -34,10 +36,8 @@ export const ControlBoard = () => {
   }, [utfError, items])
 
   const handleChangeTab = (e: SyntheticEvent, newValue: ETabs) => {
-    console.log('newValue', newValue)
     setCurrentTab(newValue)
   }
-  console.log('currentTab', currentTab)
 
   return (
     <Paper>
@@ -73,9 +73,9 @@ export const ControlBoard = () => {
           testId={`tab-panel-${tab.id}`}
           key={tab.id}
         >
-          {tab.title}
+          <tab.component />
         </TabPanel>
       ))}
     </Paper>
   )
-}
+})

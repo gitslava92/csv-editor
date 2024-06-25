@@ -4,27 +4,24 @@ import { Box, Button, FormControl, InputLabel, MenuItem, Select, Typography } fr
 import { checkNonAsciiCharacters } from '@renderer/common/helpers/checkNonUTF8Characters';
 import { DELIMITERS } from '@renderer/common/constants';
 import { dateToISO } from '@renderer/common/helpers/dateConverter';
-import { UploadFileProps } from './UploadControl.types';
 import { JsonToCsv } from '../../Molecules/JsonToCsv/JsonToCsv';
 import { PickerBox, RootBox } from './UploadControl.styles'
-import { PeriodFormat } from '@renderer/components/Organisms/PeriodControl/PeriodFormat'
+import { rootStore } from '../../store/rootStore'
+import { observer } from 'mobx-react-lite'
+import { PeriodFormat } from '@renderer/components/Molecules/PeriodFormat/PeriodFormat'
 
-export function UploadControl({
-  items,
-  setItems,
-  format,
-  defaultData,
-  setDefaultData,
-  fileName,
-  setFileName,
-  delimiter,
-  setDelimiter,
-  exportDelimiter,
-  setExportDelimiter,
-  setUtfError,
-  uploadDateFormat,
-  setUploadDateFormat
-}: UploadFileProps) {
+export const  UploadControl = observer(() => {
+  const {
+    items: {items, setItems},
+    dateFormat: {dateformat},
+    defaultData: {defaultData, setDefaultData },
+    fileName: {fileName, setFileName},
+    delimiter: {delimiter, setDelimiter},
+    exportDelimiter: {exportDelimiter, setExportDelimiter},
+    utfError: {setUtfError},
+    setUploadDateFormat,
+    uploadDateFormat: {uploadDateFormat, }
+  } = rootStore;
   const { CSVReader } = useCSVReader();
 
   const csvConfig = {
@@ -127,7 +124,7 @@ export function UploadControl({
           key !== 'phone' &&
           key !== 'id' &&
           key !== 'isUTF'
-            ? dayjs(val).utc().format(format)
+            ? dayjs(val).utc().format(dateformat)
             : val,
       }))
     )
@@ -280,4 +277,4 @@ export function UploadControl({
       </CSVReader>
     </RootBox>
   );
-}
+})

@@ -2,6 +2,7 @@ import { Snackbar } from '../Atoms/Snackbar/Snackbar'
 import { ControlBoard } from '../Organisms/ControlBoard/ControlBoard'
 import { DataTable } from '../Organisms/DataTable/DataTable'
 import { createRootStore } from '@renderer/components/store/rootStore';
+import { Grid } from '@mui/material'
 
 export const Main = () => {
   const {
@@ -15,7 +16,7 @@ export const Main = () => {
   } = createRootStore()
 
   return (
-    <>
+    <Grid container>
       <ControlBoard />
       <Snackbar
         utfError={utfError}
@@ -28,6 +29,6 @@ export const Main = () => {
         format={format}
         setUtfError={setUtfError}
       />
-    </>
+    </Grid>
   )
 }

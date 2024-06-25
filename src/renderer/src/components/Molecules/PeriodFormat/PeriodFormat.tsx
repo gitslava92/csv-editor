@@ -8,7 +8,7 @@ interface PeriodProps {
   label: string;
 }
 
-export function PeriodFormat({ format, setFormat, label }: PeriodProps) {
+export const PeriodFormat = ({ format, setFormat, label }: PeriodProps) => {
   const [isEdit, setIsEdit] = useState(false);
   const [change, setChange] = useState(format);
 

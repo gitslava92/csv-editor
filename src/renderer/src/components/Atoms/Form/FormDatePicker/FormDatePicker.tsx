@@ -1,28 +1,19 @@
-import { ReactHookFormLabelController } from '@renderer/components/Atoms/Form/types';
-import {
-  DateRange,
-  DateTimePickerField,
-  Error,
-} from '@renderer/components/Atoms/Form/FormDatePicker/FormDatePicker.styles';
-import { TextFieldProps as MUITextFieldProps } from '@mui/material';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import 'dayjs/locale/en-gb';
-import { Controller } from 'react-hook-form';
+import { ReactHookFormLabelController } from '@renderer/components/Atoms/Form/types'
+import { DateRange, DateTimePickerField } from '@renderer/components/Atoms/Form/FormDatePicker/FormDatePicker.styles'
+import { TextFieldProps as MUITextFieldProps } from '@mui/material'
+import { LocalizationProvider } from '@mui/x-date-pickers'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import 'dayjs/locale/en-gb'
+import { Controller } from 'react-hook-form'
+import { Error } from '@renderer/components/Atoms/styles'
 
-interface ValidateErrorProps {
-  actionsMode?: boolean;
-}
-
-export type InputProps = ReactHookFormLabelController<MUITextFieldProps> &
-  ValidateErrorProps;
+export type InputProps = ReactHookFormLabelController<MUITextFieldProps>;
 
 export const FormDatePicker = (props: InputProps) => {
   const {
     label,
     name,
     fullWidth,
-    helperText,
     rules,
     defaultValue,
     disablePast,
@@ -37,16 +28,17 @@ export const FormDatePicker = (props: InputProps) => {
     views,
     autoComplete,
     placeholder,
-    actionsMode,
-    minDate,
-  } = props;
+    minDate
+  } = props
 
   return (
     <Controller
-      render={({ field: { onChange, onBlur } }) => (
+      name={name}
+      rules={rules}
+      control={control}
+      render={({ field: { onChange, onBlur }, fieldState: { error } }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="en-gb">
           <DateTimePickerField
-            actionsMode={actionsMode}
             autoComplete={autoComplete}
             disabled={disabled}
             readOnly={readOnly}
@@ -57,13 +49,13 @@ export const FormDatePicker = (props: InputProps) => {
             maxDate={maxDate}
             minDate={minDate}
             views={views}
-            closeOnSelect={Boolean(closeOnSelect)}
+            closeOnSelect={!!closeOnSelect}
             onChange={(newValue) => {
-              onChange(newValue);
+              onChange(newValue)
             }}
-            error={Boolean(helperText?.length)}
+            error={!!error?.message}
             slots={{
-              openPickerIcon: DateRange,
+              openPickerIcon: DateRange
             }}
             slotProps={{
               textField: {
@@ -73,21 +65,16 @@ export const FormDatePicker = (props: InputProps) => {
                 error: actionsMode ? false : !!helperText,
                 placeholder,
                 sx,
-                onBlur: (e) => onBlur(e),
-                onChange: (e) => onChange(e),
-                helperText: actionsMode ? null : (
-                  <Error data-testid={`test-error-msg-${name}`}>
-                    {helperText}
-                  </Error>
-                ),
-              },
+                onBlur,
+                onChange,
+                helperText: <Error data-testid={`${name}-date-time-picker-error`}>
+                  {error?.message}
+                </Error>
+              }
             }}
           />
         </LocalizationProvider>
       )}
-      rules={rules}
-      control={control}
-      name={name}
     />
-  );
-};
+  )
+}

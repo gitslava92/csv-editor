@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import { Edit, EditOff } from '@mui/icons-material';
 import dayjs from 'dayjs';
-import { createRootStore } from '@renderer/components/store/rootStore';
+import { rootStore } from '../../store/rootStore'
 
 const filters = [
   {
@@ -38,7 +38,7 @@ const filters = [
 ];
 
 export function FunnelControl() {
-  const { itemsStore: {items} } = createRootStore();
+  const { items } = rootStore.items;
 
   const [key, setKey] = useState<string>('');
   const [funnelKey, setFunnelKey] = useState<string>('funnel');

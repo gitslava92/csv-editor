@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { createRootStore } from '@renderer/components/store/rootStore';
+import { rootStore } from '../../store/rootStore'
 
 export function DuplicateControl() {
-  const rootStore = createRootStore();
   const { items, setItems } = rootStore.items;
 
   const [key, setKey] = useState<string>('');

@@ -4,8 +4,6 @@ import { createUploadDateFormatStore } from './uploadDateFormatStore'
 import { createUtfErrorStore } from './utfError'
 import { createIsSnackBarOpenStore } from './isSnackBarOpen'
 import { createCurrentTabStore } from './currentTabStore'
-import { useState } from 'react'
-import dayjs, { Dayjs } from 'dayjs'
 import { createDefaultItemsStore } from './defaultItemsStore'
 import { createFileNameStore } from './fileNameStore'
 import { createDateValueFromStore } from './dateValueFromStore'
@@ -15,7 +13,7 @@ import { createDelimiterStore } from './delimiterStore'
 import { createExportDelimiterStore } from './exportDelimiterStore'
 
 export const createRootStore = () => {
-  const rootStore = {
+  return {
     items: createItemStore(),
     dateFormat: createDateFormatStore(),
     uploadDateFormat: createUploadDateFormatStore(),
@@ -30,8 +28,7 @@ export const createRootStore = () => {
     delimiter: createDelimiterStore(),
     exportDelimiter: createExportDelimiterStore(),
   };
-
-  return rootStore;
 };
 
+export const rootStore = createRootStore();
 export type RootStore = ReturnType<typeof createRootStore>;
