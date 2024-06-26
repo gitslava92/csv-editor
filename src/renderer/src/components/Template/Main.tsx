@@ -1,19 +1,19 @@
 import { Snackbar } from '../Atoms/Snackbar/Snackbar'
 import { ControlBoard } from '../Organisms/ControlBoard/ControlBoard'
 import { DataTable } from '../Organisms/DataTable/DataTable'
-import { createRootStore } from '@renderer/components/store/rootStore';
 import { Grid } from '@mui/material'
+import { rootStore } from '../store/rootStore'
 
 export const Main = () => {
   const {
     items: { items, setItems },
     utfError: { utfError, setUtfError },
-    dateFormat: { format },
+    dateFormat: { dateFormat },
     isSnackBarOpen: { isSnackBarOpen, setIsSnackBarOpen },
     dateFrom: { dateValueFrom, setDateValueFrom },
     dateTo: { dateValueTo, setDateValueTo },
     error: { error },
-  } = createRootStore()
+  } = rootStore;
 
   return (
     <Grid container>
@@ -26,7 +26,7 @@ export const Main = () => {
       <DataTable
         rows={items}
         setData={setItems}
-        format={format}
+        format={dateFormat}
         setUtfError={setUtfError}
       />
     </Grid>

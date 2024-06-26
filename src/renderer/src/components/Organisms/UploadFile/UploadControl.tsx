@@ -13,14 +13,13 @@ import { PeriodFormat } from '@renderer/components/Molecules/PeriodFormat/Period
 export const  UploadControl = observer(() => {
   const {
     items: {items, setItems},
-    dateFormat: {dateformat},
-    defaultData: {defaultData, setDefaultData },
+    dateFormat: {dateFormat},
+    defaultItems: {defaultItems, setDefaultItems },
     fileName: {fileName, setFileName},
     delimiter: {delimiter, setDelimiter},
     exportDelimiter: {exportDelimiter, setExportDelimiter},
     utfError: {setUtfError},
-    setUploadDateFormat,
-    uploadDateFormat: {uploadDateFormat, }
+    uploadDateFormat: {uploadDateFormat, setUploadDateFormat},
   } = rootStore;
   const { CSVReader } = useCSVReader();
 
@@ -108,14 +107,14 @@ export const  UploadControl = observer(() => {
     },
   };
 
-  const dataWithoitId = items.map((item: any) => {
+  const dataWithoutId = items.map((item: any) => {
     const objCopy = { ...item };
     delete objCopy.id;
     delete objCopy.isUTF;
     return objCopy;
   });
 
-  const newData = dataWithoitId.map((item: any) =>
+  const newData = dataWithoutId.map((item: any) =>
     Object.assign(
       {},
       ...Object.entries(item).map(([key, val]: any) => ({
@@ -124,7 +123,7 @@ export const  UploadControl = observer(() => {
           key !== 'phone' &&
           key !== 'id' &&
           key !== 'isUTF'
-            ? dayjs(val).utc().format(dateformat)
+            ? dayjs(val).utc().format(dateFormat)
             : val,
       }))
     )
@@ -166,7 +165,7 @@ export const  UploadControl = observer(() => {
 
           setFileName(acceptedFile.name ?? '');
           setItems(newResult);
-          setDefaultData(newResult);
+          setDefaultItems(newResult);
         }}
       >
         {({ getRootProps, ProgressBar, getRemoveFileProps }: any) => (
@@ -231,7 +230,7 @@ export const  UploadControl = observer(() => {
                     variant='contained'
                     sx={styles.resetBtn}
                     {...getRemoveFileProps()}
-                    onClick={() => setItems(defaultData)}
+                    onClick={() => setItems(defaultItems)}
                   >
                     Reset all
                   </Button>

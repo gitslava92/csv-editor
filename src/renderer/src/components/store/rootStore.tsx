@@ -20,7 +20,7 @@ export const createRootStore = () => {
     utfError: createUtfErrorStore(),
     isSnackBarOpen: createIsSnackBarOpenStore(),
     currentTab: createCurrentTabStore(),
-    defaultData: createDefaultItemsStore(),
+    defaultItems: createDefaultItemsStore(),
     fileName: createFileNameStore(),
     dateFrom: createDateValueFromStore(),
     dateTo: createDateValueToStore(),

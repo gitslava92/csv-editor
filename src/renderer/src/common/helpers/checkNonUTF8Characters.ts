@@ -1,15 +1,18 @@
-import * as iconv from 'iconv-lite';
+export function checkNonUTF8Characters(str) {
+  const encoder = new TextEncoder();
+  const utf8Array = encoder.encode(str);
+  const decoder = new TextDecoder('utf-8', { fatal: true });
 
-export function checkNonUTF8Characters(str: string): boolean {
-  const buffer = Buffer.from(str, 'binary');
-  const decoded = iconv.decode(buffer, 'utf8');
-  return (
-    Buffer.byteLength(decoded, 'utf8') !== Buffer.byteLength(str, 'binary')
-  );
+  try {
+    decoder.decode(utf8Array);
+    return false;
+  } catch (e) {
+    return true;
+  }
 }
 
-export function checkNonAsciiCharacters(item: any): boolean {
-  const nonAsciiValues = Object.values(item).some((str: any) =>
+export function checkNonAsciiCharacters(item) {
+  const nonAsciiValues = Object.values(item).some(str =>
     checkNonUTF8Characters(str)
   );
   return nonAsciiValues;

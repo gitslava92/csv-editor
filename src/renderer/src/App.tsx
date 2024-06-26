@@ -1,5 +1,5 @@
 import { getTheme } from '@renderer/common/theme/theme'
-import { CssBaseline, PaletteMode } from '@mui/material'
+import { PaletteMode } from '@mui/material'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
@@ -37,7 +37,6 @@ export const App = () => {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
-        <CssBaseline />
         <Main />
       </ThemeProvider>
     </ColorModeContext.Provider>

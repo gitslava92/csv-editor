@@ -52,6 +52,8 @@ export const DataTable = ({
   const [filteredData, setFilteredData] = useState<any>([]);
   const theme = useTheme();
 
+  console.log('rows', rows)
+
   useEffect(() => {
     setFilteredData(rows);
   }, [rows]);

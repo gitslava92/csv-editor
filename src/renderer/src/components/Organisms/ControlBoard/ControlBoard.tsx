@@ -15,7 +15,7 @@ import { Paper } from './ControlBoard.styles'
 
 const tabs = [
   { id: ETabs.File, title: 'File', component: UploadControl },
-  // { id: ETabs.Period, title: 'Period', component: PeriodControl },
+  { id: ETabs.Period, title: 'Period', component: PeriodControl },
   // { id: ETabs.Duplicates, title: 'Duplicates', component: DuplicateControl },
   { id: ETabs.Adding, title: 'Adding', component: AddingControl },
   // { id: ETabs.Funnels, title: 'Funnels', component: FunnelControl }

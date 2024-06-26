@@ -1,9 +1,10 @@
 import { Box, Button } from '@mui/material'
 import dayjs from 'dayjs'
 import * as isBetween from 'dayjs/plugin/isBetween'
-import { PeriodPicker } from './PeriodPicker'
+import { PeriodPicker } from '../../Molecules/PeriodPicker/PeriodPicker'
 import { PeriodFormat } from '@renderer/components/Molecules/PeriodFormat/PeriodFormat'
 import { rootStore } from '../../store/rootStore'
+import { FormProvider, useForm } from 'react-hook-form'
 
 dayjs.extend(isBetween as any)
 
@@ -13,8 +14,10 @@ export function PeriodControl() {
     dateFormat: { format, setDateFormat },
     dateFrom: { dateValueFrom, setDateValueFrom },
     dateTo: { dateValueTo, setDateValueTo },
-    error: { error },
+    error: { error }
   } = rootStore
+
+  const methods = useForm({ mode: 'onBlur', defaultValues })
 
   const handleResetDates = () => {
     setDateValueFrom(dayjs())
@@ -76,42 +79,44 @@ export function PeriodControl() {
   }
 
   return (
-    <Box sx={styles.wrapper}>
-      <Box sx={styles.pickersBox}>
-        <PeriodPicker
-          fromValue={dateValueFrom}
-          setFromValue={setDateValueFrom}
-          toValue={dateValueTo}
-          setToValue={setDateValueTo}
-          error={error}
-          format={format}
-        />
-        <PeriodFormat
-          format={format}
-          setFormat={setDateFormat}
-          label={'Date format'}
-        />
-      </Box>
-      <Box sx={styles.btnBox}>
+    <FormProvider  {...methods}>
+      <Box sx={styles.wrapper}>
+        <Box sx={styles.pickersBox}>
+          <PeriodPicker
+            fromValue={dateValueFrom}
+            setFromValue={setDateValueFrom}
+            toValue={dateValueTo}
+            setToValue={setDateValueTo}
+            error={error}
+            format={format}
+          />
+          <PeriodFormat
+            format={format}
+            setFormat={setDateFormat}
+            label={'Date format'}
+          />
+        </Box>
         <Box sx={styles.btnBox}>
+          <Box sx={styles.btnBox}>
+            <Button
+              variant="contained"
+              disabled={isDisabled}
+              onClick={handleResetDates}
+              sx={styles.btn}
+            >
+              Reset Dates
+            </Button>
+          </Box>
           <Button
             variant="contained"
             disabled={isDisabled}
-            onClick={handleResetDates}
+            onClick={handleChangeDates}
             sx={styles.btn}
           >
-            Reset Dates
+            Change Dates
           </Button>
         </Box>
-        <Button
-          variant="contained"
-          disabled={isDisabled}
-          onClick={handleChangeDates}
-          sx={styles.btn}
-        >
-          Change Dates
-        </Button>
       </Box>
-    </Box>
+    </FormProvider>
   )
 }
