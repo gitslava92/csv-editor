@@ -73,41 +73,43 @@ export function AddingControl() {
   }
 
   return (
-    <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-      {!!items?.length && fields?.map((field: Record<string, any>) => {
-        const key = Object.entries(field)[0][0]
-        const isDate = Object.entries(field)[0][1]
-        return (
-          <>
-            {isDate ? (
-              <FormDatePicker
-                key={key}
-                name={key}
-                label={key}
-                format={dateFormat}
-                control={control}
-              />
-            ) : (
-              <FormInput
-                label={key}
-                disabled={key === 'id'}
-                size="small"
-                control={control}
-              />
-            )}
-          </>
-        )
-      })}
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-        <Button
-          onClick={reset}
-          variant="contained"
-        >
-          Reset
-        </Button>
-        <Button variant="contained" type="submit">
-          Submit
-        </Button>
+    <Box width="100%">
+      <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+        {!!items?.length && fields?.map((field: Record<string, any>) => {
+          const key = Object.entries(field)[0][0]
+          const isDate = Object.entries(field)[0][1]
+          return (
+            <>
+              {isDate ? (
+                <FormDatePicker
+                  key={key}
+                  name={key}
+                  label={key}
+                  format={dateFormat}
+                  control={control}
+                />
+              ) : (
+                <FormInput
+                  label={key}
+                  disabled={key === 'id'}
+                  size="small"
+                  control={control}
+                />
+              )}
+            </>
+          )
+        })}
+        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+          <Button
+            onClick={reset}
+            variant="contained"
+          >
+            Reset
+          </Button>
+          <Button variant="contained" type="submit">
+            Submit
+          </Button>
+        </Box>
       </Box>
     </Box>
   )

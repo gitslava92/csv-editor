@@ -40,7 +40,7 @@ export const ControlBoard = observer(() => {
   }
 
   return (
-    <Paper>
+    <Paper elevation={8}>
       <TitleBox>
         <Typography variant="h5">
           Controls

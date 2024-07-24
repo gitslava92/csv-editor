@@ -94,12 +94,14 @@ export function PeriodPicker() {
               sx={styles.periodPickerFrom}
             />
           </Box>
+
           <Typography
             variant="body1"
             sx={{ display: { xs: 'none', md: 'block' } }}
           >
             -
           </Typography>
+
           <Box sx={styles.pickerBox}>
             <DateTimePicker
               label="Choose the end period"

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react'
-import { Box, IconButton, TextField, Tooltip } from '@mui/material';
-import { Edit, EditOff } from '@mui/icons-material';
+import { Box, FormControl, IconButton, InputLabel, TextField, Tooltip } from '@mui/material'
+import { Edit, EditOff } from '@mui/icons-material'
 
 interface PeriodProps {
   format: string;
@@ -23,14 +23,17 @@ export const PeriodFormat = ({ format, setFormat, label }: PeriodProps) => {
 
   return (
     <Box display='flex' gap={1}>
-      <TextField
-        label={label}
-        value={change}
-        onChange={handleChange}
-        size='small'
-        disabled={!isEdit}
-        fullWidth
-      />
+      <FormControl margin="none">
+        <TextField
+          label={label}
+          value={change}
+          onChange={handleChange}
+          size='small'
+          margin="none"
+          disabled={!isEdit}
+          fullWidth
+        />
+      </FormControl>
       <IconButton onClick={handleClick}>
         {!isEdit ? (
           <Tooltip title='Enable format editing mode'>

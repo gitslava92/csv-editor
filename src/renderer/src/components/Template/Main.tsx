@@ -3,6 +3,7 @@ import { ControlBoard } from '../Organisms/ControlBoard/ControlBoard'
 import { DataTable } from '../Organisms/DataTable/DataTable'
 import { Grid } from '@mui/material'
 import { rootStore } from '../store/rootStore'
+import { BackgroundBox, RootBox } from './Main.styles'
 
 export const Main = () => {
   const {
@@ -16,19 +17,23 @@ export const Main = () => {
   } = rootStore;
 
   return (
-    <Grid container>
-      <ControlBoard />
-      <Snackbar
-        utfError={utfError}
-        open={isSnackBarOpen}
-        setOpen={setIsSnackBarOpen}
-      />
-      <DataTable
-        rows={items}
-        setData={setItems}
-        format={dateFormat}
-        setUtfError={setUtfError}
-      />
-    </Grid>
+    <RootBox>
+      <BackgroundBox>
+        <Grid container>
+          <ControlBoard />
+          <Snackbar
+            utfError={utfError}
+            open={isSnackBarOpen}
+            setOpen={setIsSnackBarOpen}
+          />
+          <DataTable
+            rows={items}
+            setData={setItems}
+            format={dateFormat}
+            setUtfError={setUtfError}
+          />
+        </Grid>
+      </BackgroundBox>
+    </RootBox>
   )
 }

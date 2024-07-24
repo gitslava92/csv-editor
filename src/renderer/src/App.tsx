@@ -14,7 +14,6 @@ export const ColorModeContext = createContext({
 })
 
 export const App = () => {
-
   const [mode, setMode] = useState<PaletteMode>(
     (localStorage.getItem('theme') || 'light') as 'light' | 'dark'
   )
